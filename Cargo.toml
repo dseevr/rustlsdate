@@ -1,0 +1,31 @@
+[package]
+name = "rustlsdate"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+chrono = "0.4.22"
+libc = "0.2.131"
+reqwest = { version = "0.11.11", features = ["rustls-tls"] }
+tokio = { version = "1.20.1", features = ["full"] }
+
+# https://doc.rust-lang.org/cargo/reference/profiles.html
+[profile.release]
+debug = false
+#opt-level = 3
+strip = "symbols"
+embed-bitcode = "off"
+lto = "off"
+incremental = true
+force-frame-pointers = "no"
+
+[profile.prod]
+inherits = "release"
+debug = false
+opt-level = 3
+embed-bitcode = "on"
+lto = "fat"
+incremental = false
+codegen-units = 1

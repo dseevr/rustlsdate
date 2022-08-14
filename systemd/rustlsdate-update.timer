@@ -1,0 +1,13 @@
+[Unit]
+Description=run rustlsdate every 12 hours
+Requires=rustlsdate.service
+
+[Timer]
+Unit=rustlsdate.service
+OnUnitInactiveSec=12h
+RandomizedDelaySec=60
+Persistent=true
+OnBootSec=180
+
+[Install]
+WantedBy=timers.target
